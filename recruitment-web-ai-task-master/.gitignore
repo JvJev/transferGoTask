@@ -2,6 +2,7 @@
 /node_modules
 /.pnp
 .pnp.js
+.next
 
 # Public directory
 /public
@@ -11,6 +12,9 @@ package-lock.json
 
 # testing
 /coverage
+
+# Cache directory (contains API data)
+/cache
 
 # production
 /build

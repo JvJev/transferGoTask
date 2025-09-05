@@ -16,3 +16,36 @@ In this file, please describe the situations and ways in which you used AI tools
 ## New Feature Implementation
 
 *(Example: I asked GitHub Copilot to generate the boilerplate for a JavaScript function that sorts an array of objects.)*
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+I added project files to Claude.ai for better context.
+
+`1`
+## I checked responsive design issue first. Instantly in browser developer tools I see that on smaller screens crypto cards are off the middle and appear on just part of the screen. I made few different mobile screen sizes screenshots. Suggested solution worked and it was simple CSS fix as i expected. Suggested solution works fine, is simple and does not require many changes in the code base, so I applied it.
+
+    grid-template-columns: repeat(4, 250px); /* Rigid column width */
+chenged into:
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+Responsive design issue resolved.
+
+
+
+
+`2`
+##   I opened and went back few times into crypto cards and encoutered issue. I coppied error from browser for AI and it noted that it is "429 rate limits" issue. Also, copied terminal window logs to double check if issue is realy rate limits  - AI confirmed it.
+
+## This quite serious issue because API data is not displayed, user gets error messages and application itself is crashing. Solution I have in mind would be cashing API data or similar workaround to save last posible API data states in order to send less API requests. I chave checked with AI, it suggested 3 solutions:
+
+Option 1: Client-Side Data Fetching with SWR/React Query (Recommended)
+
+Option 2: Server-Side Caching with Redis/Database (Production Ready)
+
+Option 3: Hybrid Approach with Fallback Data
+
+## I deep dived into solution 2 (cashing), tried suggested implementation but it didn't work because project does not have backend side. I found this by googling and asking questions with claude. I could create simple backend for the project and make redis work, but that would be an overkill for such project. Also, since I need this task only to run localy I decided to do a workaround (which i did while developing vehicles auction crawler, so I know it would work). I create local json file with API data that is updated every 60 seconds by an API call. Project's main page and id page will be taking API data from json file localy instead of making too many API calls, sending too many requests and crashing the app. Such workaround is chosen because app is runing localy without database or backend. In this case I need to create 1 simple node file, launch 1 extra command on other terminal and rate limit issue while working localy is resolved.
+
+Process: With claude AI I created code files. Goal was to make working solution without overengineering it and make as little as posible changes in existing code files. To get to to satisfying solution took me a while because AI "halucinated" with unrequested code changes and I had an issue with 'fs' (file system) implementation that I noticed later. In final version I added 2 files: updateCoins.js for fetching every 60 seconds and dataUtils.js to get and use API data from file in the project instead of fetching everytime.
+
+BONUS: while solving the issue I noticed that it made few changes related to other task ('* **Logical Bug:** The search bar on the main page is case-sensitive. Please correct it to search regardless of the case of the input text.'). I compared code before and after changes and honestly my solution would have been to implement toLowerCase function to search field anyway so I was satisfied with this AI fix. So 2 rabbits with 1 shot.
+NOTE: Tasks list was not given for AI in the projects context. I feel that this task is more about though process and engaging with AI rather than plain solution.

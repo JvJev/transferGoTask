@@ -1,7 +1,21 @@
 import Link from 'next/link';
 import styles from '../../styles/Coin.module.css';
+import { getCoinData, getCoinsData } from '../../lib/dataUtils';
 
 function CoinPage({ coin }) {
+  if (!coin || !coin.market_data) {
+    return (
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <h1>Coin not found</h1>
+          <p>The requested cryptocurrency could not be loaded. Launch "node updateCoins.js" command in other terminal from root directory.</p>
+          <Link href="/" legacyBehavior>
+            <a className={styles.backButton}>&larr; Back to list</a>
+          </Link>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
@@ -16,7 +30,9 @@ function CoinPage({ coin }) {
         <div className={styles.detailsGrid}>
           <div className={styles.detailBox}>
             <h3>Current Price</h3>
-            <p className={styles.priceValue}>${coin.market_data.current_price.usd}</p>
+            <p className={styles.priceValue}>
+              ${coin.market_data.current_price.usd.toLocaleString()}
+            </p>
           </div>
           <div className={styles.detailBox}>
             <h3>24h Change</h3>
@@ -26,14 +42,13 @@ function CoinPage({ coin }) {
           </div>
           <div className={styles.detailBox}>
             <h3>Market Cap</h3>
-            <p>${coin.market_data.market_cap.usd}</p>
+            <p>${coin.market_data.market_cap.usd.toLocaleString()}</p>
           </div>
         </div>
 
         <div className={styles.description}>
           <h3>About {coin.name}</h3>
-          {/* We use dangerouslySetInnerHTML because the API returns HTML */}
-          <p dangerouslySetInnerHTML={{ __html: coin.description.en.split('. ')[0] + '.' }}></p>
+          <p>{coin.description.en}</p>
         </div>
 
         <Link href="/" legacyBehavior>
@@ -47,33 +62,32 @@ function CoinPage({ coin }) {
 export default CoinPage;
 
 export async function getStaticProps(context) {
-      const { id } = context.params;
-      const res = await fetch(`https://api.coingecko.com/api/v3/coins/${id}`);
-      if (!res.ok) {
-          throw new Error(`Failed to fetch coin data: ${res.status}`);
-      }
-      const coin = await res.json();
+  const { id } = context.params;
+  const coin = getCoinData(id);
 
-      return {
-          props: {
-          coin,
-          },
-          revalidate: 60,
-      };
+  if (!coin) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      coin,
+    },
+    revalidate: 30,
+  };
 }
 
 export async function getStaticPaths() {
-      const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false');
-      if (!res.ok) {
-          throw new Error(`Failed to fetch paths: ${res.status}`);
-      }
-      const coins = await res.json();
-      const paths = coins.map(coin => ({
-          params: { id: coin.id },
-      }));
+  const coins = getCoinsData();
+  
+  const paths = coins.map(coin => ({
+    params: { id: coin.id },
+  }));
 
-      return {
-          paths,
-          fallback: 'blocking',
-      };
+  return {
+    paths,
+    fallback: 'blocking',
+  };
 }
