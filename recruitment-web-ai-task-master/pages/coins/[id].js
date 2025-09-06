@@ -1,42 +1,7 @@
 import Link from 'next/link';
 import styles from '../../styles/Coin.module.css';
 import { getCoinData, getCoinsData } from '../../lib/dataUtils';
-
-// Helper function for validation
-function isValidNumber(value) {
-  return value != null && !isNaN(parseFloat(value));
-}
-
-function formatCurrency(value, options = {}) {
-  if (!isValidNumber(value)) return 'N/A';
-  
-  return parseFloat(value).toLocaleString('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 6,
-    ...options
-  });
-}
-
-function formatLargeNumber(value) {
-  if (!isValidNumber(value)) return 'N/A';
-  
-  const numValue = parseFloat(value);
-  
-  if (numValue >= 1e12) return `$${(numValue / 1e12).toFixed(2)}T`;
-  if (numValue >= 1e9) return `$${(numValue / 1e9).toFixed(2)}B`;
-  if (numValue >= 1e6) return `$${(numValue / 1e6).toFixed(2)}M`;
-  if (numValue >= 1e3) return `$${(numValue / 1e3).toFixed(2)}K`;
-  
-  return formatCurrency(numValue);
-}
-
-function formatPercentage(value) {
-  if (!isValidNumber(value)) return 'N/A';
-  
-  return `${parseFloat(value).toFixed(2)}%`;
-}
+import { formatCurrency, formatLargeNumber, formatPercentageSimple } from '../../lib/formatUtils';
 
 function CoinPage({ coin }) {
   if (!coin || !coin.market_data) {
@@ -73,7 +38,7 @@ function CoinPage({ coin }) {
           <div className={styles.detailBox}>
             <h3>24h Change</h3>
             <p className={coin.market_data?.price_change_percentage_24h > 0 ? styles.positive : styles.negative}>
-              {formatPercentage(coin.market_data?.price_change_percentage_24h)}
+              {formatPercentageSimple(coin.market_data?.price_change_percentage_24h)}
             </p>
           </div>
           <div className={styles.detailBox}>

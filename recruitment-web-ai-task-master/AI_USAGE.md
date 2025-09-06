@@ -59,3 +59,10 @@ NOTE: Tasks list was not given for AI in the projects context. I feel that this 
 
 After being satisfied with functionality I ordered AI to refactor functions (shorten/ improve). End result formatCurrency, formatLargeNumber, formatPercentage functions in [id].js file. No other application functionality is affected
 
+
+`4`
+## Next is * **Sorting:** Add the ability to **sort the list of cryptocurrencies** on the main page. The user should be able to sort the list by **name** (alphabetically A-Z) and by **price** (ascending and descending). I suspected this to be quite simple implementation, asked AI different implementation options. In one of the options it mentioned that sorting would be limited to price and sort alphabeticaly. I double checked API data and see that it gives much more that curent baisc implementation in the main page. I recreated main page cryptos data displayed and moved from crypto cards aproach to list approach (less visualy overwhelming). At the same time implemented sorting. In AI generated code i found similar formating functions. Since I already have this this functionality in [id].js page I moved the code to formatUtils.js file and reused functions in id and index pages. I planed to do it anyway later on. Furthermore, with new data from API added to main page i reworked styles as well with AI. CSS styles were good enough for now so i just pasted them. Usualy I work with design and styling at the end after application functionaly satisfies me, so will get back to improvement later.
+
+
+
+
