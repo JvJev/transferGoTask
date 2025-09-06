@@ -49,3 +49,13 @@ Process: With claude AI I created code files. Goal was to make working solution 
 
 BONUS: while solving the issue I noticed that it made few changes related to other task ('* **Logical Bug:** The search bar on the main page is case-sensitive. Please correct it to search regardless of the case of the input text.'). I compared code before and after changes and honestly my solution would have been to implement toLowerCase function to search field anyway so I was satisfied with this AI fix. So 2 rabbits with 1 shot.
 NOTE: Tasks list was not given for AI in the projects context. I feel that this task is more about though process and engaging with AI rather than plain solution.
+
+`3` second day
+## updated AI project context with ne code
+
+## Gave AI task * **Data Formatting Bug:** On the details page, the price and market cap are displayed as raw, unreadable numbers. Please format them to be user-friendly (e.g., add thousand separators and a currency symbol).
+
+## AI given sulution worked but lacked decimals for some cryptos. I reworked code to show 8 decimal digits (cents), because by default there was only 2 but some curencies like cardano or dodge has price with many numbers after , . With AI I reworked functions to show price after decimals only if it is given in API data. Example: Etherium price is 4294.16 USD in API, so in crypto card it will be displayed 4294.16 not 4294.16000000 USD to avoid redundant zeros, but if price needs to be accurate with decimals it is displayed in crypto cards. This functionality extends up to 8 decimal numbers maximum (maximum decimal numbers given by API).
+
+After being satisfied with functionality I ordered AI to refactor functions (shorten/ improve). End result formatCurrency, formatLargeNumber, formatPercentage functions in [id].js file. No other application functionality is affected
+

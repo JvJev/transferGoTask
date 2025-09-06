@@ -2,6 +2,42 @@ import Link from 'next/link';
 import styles from '../../styles/Coin.module.css';
 import { getCoinData, getCoinsData } from '../../lib/dataUtils';
 
+// Helper function for validation
+function isValidNumber(value) {
+  return value != null && !isNaN(parseFloat(value));
+}
+
+function formatCurrency(value, options = {}) {
+  if (!isValidNumber(value)) return 'N/A';
+  
+  return parseFloat(value).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 6,
+    ...options
+  });
+}
+
+function formatLargeNumber(value) {
+  if (!isValidNumber(value)) return 'N/A';
+  
+  const numValue = parseFloat(value);
+  
+  if (numValue >= 1e12) return `$${(numValue / 1e12).toFixed(2)}T`;
+  if (numValue >= 1e9) return `$${(numValue / 1e9).toFixed(2)}B`;
+  if (numValue >= 1e6) return `$${(numValue / 1e6).toFixed(2)}M`;
+  if (numValue >= 1e3) return `$${(numValue / 1e3).toFixed(2)}K`;
+  
+  return formatCurrency(numValue);
+}
+
+function formatPercentage(value) {
+  if (!isValidNumber(value)) return 'N/A';
+  
+  return `${parseFloat(value).toFixed(2)}%`;
+}
+
 function CoinPage({ coin }) {
   if (!coin || !coin.market_data) {
     return (
@@ -31,18 +67,18 @@ function CoinPage({ coin }) {
           <div className={styles.detailBox}>
             <h3>Current Price</h3>
             <p className={styles.priceValue}>
-              ${coin.market_data.current_price.usd.toLocaleString()}
+              {formatCurrency(coin.market_data?.current_price?.usd)}
             </p>
           </div>
           <div className={styles.detailBox}>
             <h3>24h Change</h3>
-            <p className={coin.market_data.price_change_percentage_24h > 0 ? styles.positive : styles.negative}>
-              {coin.market_data.price_change_percentage_24h.toFixed(2)}%
+            <p className={coin.market_data?.price_change_percentage_24h > 0 ? styles.positive : styles.negative}>
+              {formatPercentage(coin.market_data?.price_change_percentage_24h)}
             </p>
           </div>
           <div className={styles.detailBox}>
             <h3>Market Cap</h3>
-            <p>${coin.market_data.market_cap.usd.toLocaleString()}</p>
+            <p>{formatLargeNumber(coin.market_data?.market_cap?.usd)}</p>
           </div>
         </div>
 
