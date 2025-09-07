@@ -37,6 +37,87 @@
   color: #9ca3af;
 }
 
+.navigationButtons {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.navButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: #111115;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 1px solid #1e1e23;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navButton:hover {
+  background: #1a1a1f;
+  border-color: #2a2a2f;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.favoritesButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #000000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+}
+
+.favoritesButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+  filter: brightness(1.1);
+}
+
+.favoritesCount {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.125rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+}
+
+.clearButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.clearButton:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
 .controls {
   display: flex;
   gap: 1rem;
@@ -284,6 +365,18 @@
   
   .searchBar, .sortSelect {
     width: 100%;
+  }
+  
+  .navigationButtons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .navButton,
+  .favoritesButton,
+  .clearButton {
+    width: 100%;
+    justify-content: center;
   }
   
   .tableContainer {

@@ -20,7 +20,7 @@
   border-bottom: 1px solid #1e1e23;
   padding: 1rem;
   display: grid;
-  grid-template-columns: 60px 200px 120px 100px 140px 140px 1fr;
+  grid-template-columns: 60px 200px 120px 100px 140px 140px 1fr 50px;
   gap: 1rem;
   align-items: center;
 }
@@ -51,6 +51,13 @@
   text-align: right;
 }
 
+.headerFavorite {
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
 .coinRow {
   border-bottom: 1px solid #1a1a1f;
   transition: all 0.3s ease;
@@ -67,7 +74,7 @@
 .coinRowInner {
   padding: 1rem;
   display: grid;
-  grid-template-columns: 60px 200px 120px 100px 140px 140px 1fr;
+  grid-template-columns: 60px 200px 120px 100px 140px 140px 1fr 50px;
   gap: 1rem;
   align-items: center;
   text-decoration: none;
@@ -153,6 +160,44 @@
   font-size: 0.9rem;
 }
 
+.favoriteCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.favoriteButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #3f3f46;
+  transition: all 0.2s ease;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.favoriteButton:hover {
+  color: #fbbf24;
+  transform: scale(1.2);
+  background: rgba(251, 191, 36, 0.1);
+}
+
+.favoriteButton.favoriteActive {
+  color: #fbbf24;
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
+}
+
+.favoriteButton.favoriteActive:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
 .positive {
   color: #10b981;
 }
@@ -169,9 +214,14 @@
   padding: 1rem;
 }
 
+.mobileCardWrapper {
+  position: relative;
+}
+
 .mobileCardLink {
   text-decoration: none;
   color: inherit;
+  display: block;
 }
 
 .mobileCard {
@@ -193,6 +243,38 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
+  position: relative;
+}
+
+.mobileFavoriteButton {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #3f3f46;
+  transition: all 0.2s ease;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.mobileFavoriteButton:hover {
+  color: #fbbf24;
+  transform: translateY(-50%) scale(1.2);
+  background: rgba(251, 191, 36, 0.1);
+}
+
+.mobileFavoriteButton.favoriteActive {
+  color: #fbbf24;
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
 }
 
 .mobileCardGrid {
@@ -265,5 +347,9 @@
   
   .mobileCard {
     padding: 1rem;
+  }
+  
+  .mobileCardHeader {
+    padding-right: 2.5rem;
   }
 }

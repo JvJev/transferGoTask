@@ -1,19 +1,22 @@
+// pages/index.js
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import { getCoinsData } from '../lib/dataUtils';
+import { useFavorites } from '../lib/favoritesContext';
 import CoinList from '../components/CoinList';
-
-
 
 export default function Home({ initialCoins }) {
   const [coins, setCoins] = useState(initialCoins);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('market_cap_rank');
+  const { favorites } = useFavorites();
 
   useEffect(() => {
-    let filteredCoins = initialCoins.filter(coin =>
-      coin.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
+    let filteredCoins = initialCoins.filter(
+      (coin) =>
+        coin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     // Apply sorting
@@ -32,9 +35,15 @@ export default function Home({ initialCoins }) {
         case 'market_cap-asc':
           return a.market_cap - b.market_cap;
         case 'change_24h-desc':
-          return (b.price_change_percentage_24h || 0) - (a.price_change_percentage_24h || 0);
+          return (
+            (b.price_change_percentage_24h || 0) -
+            (a.price_change_percentage_24h || 0)
+          );
         case 'change_24h-asc':
-          return (a.price_change_percentage_24h || 0) - (b.price_change_percentage_24h || 0);
+          return (
+            (a.price_change_percentage_24h || 0) -
+            (b.price_change_percentage_24h || 0)
+          );
         case 'volume-desc':
           return b.total_volume - a.total_volume;
         case 'volume-asc':
@@ -51,12 +60,19 @@ export default function Home({ initialCoins }) {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Crypto Dashboard
-        </h1>
+        <h1 className={styles.title}>Crypto Dashboard</h1>
         <p className={styles.description}>
           Find and analyze your favorite cryptocurrency.
         </p>
+
+        <div className={styles.navigationButtons}>
+          <Link href="/favorites" className={styles.favoritesButton}>
+            ★ My Favorites
+            {favorites.length > 0 && (
+              <span className={styles.favoritesCount}>{favorites.length}</span>
+            )}
+          </Link>
+        </div>
 
         <div className={styles.controls}>
           <input
@@ -66,8 +82,8 @@ export default function Home({ initialCoins }) {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          
-          <select 
+
+          <select
             className={styles.sortSelect}
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
@@ -86,7 +102,7 @@ export default function Home({ initialCoins }) {
           </select>
         </div>
 
-<CoinList coins={coins} searchTerm={searchTerm} />
+        <CoinList coins={coins} searchTerm={searchTerm} />
       </main>
     </div>
   );
@@ -94,7 +110,7 @@ export default function Home({ initialCoins }) {
 
 export async function getStaticProps() {
   const initialCoins = await getCoinsData();
-  
+
   return {
     props: {
       initialCoins,

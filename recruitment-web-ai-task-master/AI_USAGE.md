@@ -84,3 +84,7 @@ If website is running but not used (AFK as example), when API calls are not made
 
 ## I added simple next.js layout footer. I seen this next.js feature in Udemy course I took.
 
+`7`
+
+## Favorites page added as extra mile implementation. I implemented favorites page because I had some experience with similar functionalities before. Also, it alows to show how state can be stored in local storage and being saved after page refresh. Since, I had experience with such functionality it did not took me long to create page with AI. I gave clear instructions and had working code without many issues.
+
