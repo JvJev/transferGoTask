@@ -1,5 +1,5 @@
 I filled this document while working on tasks. I worked on tasks from top to botom mostly. Document t below reflects working on tasks chronologicaly. Also, i left all git commits if you are interested to see progress, not only end result.
-
+https://github.com/JvJev/transferGoTask
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
