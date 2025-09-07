@@ -1,21 +1,5 @@
-# File: AI_USAGE.md
-# Description: A blank file for the candidate to fill out.
+I filled this document while working on tasks. I worked on tasks from top to botom mostly. Document t below reflects working on tasks chronologicaly. Also, i left all git commits if you are interested to see progress, not only end result.
 
-# AI Tools Usage Documentation
-
-In this file, please describe the situations and ways in which you used AI tools (e.g., GitHub Copilot, ChatGPT, v0.dev) while working on this task.
-
-## Code Analysis
-
-*(Example: I used ChatGPT to explain how the `getStaticProps` function works in Next.js.)*
-
-## Debugging and Bug Fixing
-
-*(Example: I solved the grid responsiveness issue after consulting with an AI about the `grid-template-columns` property in CSS Grid.)*
-
-## New Feature Implementation
-
-*(Example: I asked GitHub Copilot to generate the boilerplate for a JavaScript function that sorts an array of objects.)*
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -86,5 +70,5 @@ If website is running but not used (AFK as example), when API calls are not made
 
 `7`
 
-## Favorites page added as extra mile implementation. I implemented favorites page because I had some experience with similar functionalities before. Also, it alows to show how state can be stored in local storage and being saved after page refresh. Since, I had experience with such functionality it did not took me long to create page with AI. I gave clear instructions and had working code without many issues.
+## Favorites page added as extra mile implementation. I implemented favorites page because I had some experience with similar functionalities before. Also, it alows to show how state can be stored in local storage and being saved after page refresh. Since, I had experience with such functionality it did not took me long to create page with AI. I gave clear instructions and had working code without many issues. Press star to add/remove from favorites.
 

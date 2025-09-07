@@ -1,4 +1,4 @@
-// pages/coins/[id].js (fixed for raw API data)
+// pages/coins/[id].js (with back button at top and bottom)
 import Link from 'next/link';
 import styles from '../../styles/Coin.module.css';
 import LoadingDots from '../../components/LoadingDots';
@@ -22,8 +22,6 @@ function CoinPage({ coin }) {
     );
   }
 
-  console.log('Coin data structure:', coin); // Debug log to see what we're getting
-
   const isPositive = coin.price_change_percentage_24h >= 0;
 
   // Format date helper
@@ -43,6 +41,11 @@ function CoinPage({ coin }) {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
+        {/* Back Button at Top */}
+        <Link href="/" legacyBehavior>
+          <a className={styles.backButton}>&larr; Back to Dashboard</a>
+        </Link>
+
         {/* Header Section */}
         <div className={styles.header}>
           {coin.image && (
@@ -225,6 +228,7 @@ function CoinPage({ coin }) {
           )}
         </div>
 
+        {/* Back Button at Bottom */}
         <Link href="/" legacyBehavior>
           <a className={styles.backButton}>&larr; Back to Dashboard</a>
         </Link>
