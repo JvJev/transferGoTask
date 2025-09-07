@@ -1,56 +1,27 @@
-const fs = require('fs');
-const path = require('path');
+// lib/dataUtils.js (fixed - no data transformation)
+const coinCache = require('./coinCache');
 
-const CACHE_DIR = path.join(process.cwd(), 'cache');
-const COINS_FILE = path.join(CACHE_DIR, 'coinsApiData.json');
-
-function getCoinsData() {
+async function getCoinsData() {
   try {
-    if (!fs.existsSync(COINS_FILE)) {
-      console.warn('Coins data file not found. Make sure updateCoins.js is running.');
-      return [];
-    }
-
-    const fileContent = fs.readFileSync(COINS_FILE, 'utf8');
-    const parsedData = JSON.parse(fileContent);
-    
-    return parsedData.data || [];
+    const coins = await coinCache.getCoins();
+    return coins;
   } catch (error) {
-    console.error('Error reading coins data:', error.message);
+    console.error('Error getting coins data:', error.message);
     return [];
   }
 }
 
-function getCoinData(coinId) {
+async function getCoinData(coinId) {
   try {
-    const allCoins = getCoinsData();
-    const coin = allCoins.find(c => c.id === coinId);
+    const coin = await coinCache.getCoinById(coinId);
     
     if (!coin) {
       return null;
     }
 
-    // Transform the data to match what the component expects
-    return {
-      id: coin.id,
-      symbol: coin.symbol,
-      name: coin.name,
-      image: {
-        large: coin.image
-      },
-      market_data: {
-        current_price: {
-          usd: coin.current_price
-        },
-        price_change_percentage_24h: coin.price_change_percentage_24h,
-        market_cap: {
-          usd: coin.market_cap
-        }
-      },
-      description: {
-        en: `${coin.name} is currently ranked #${coin.market_cap_rank} by market capitalization.`
-      }
-    };
+    // Return the full coin data directly from the API
+    // No transformation needed - the API gives us everything we need
+    return coin;
   } catch (error) {
     console.error(`Error reading coin data for ${coinId}:`, error.message);
     return null;

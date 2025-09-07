@@ -1,0 +1,269 @@
+/* CoinList.module.css */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  background: #111115;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  border: 1px solid #1e1e23;
+}
+
+/* Desktop Grid Styles */
+.desktopGrid {
+  display: block;
+}
+
+.header {
+  background: #0d0d10;
+  border-bottom: 1px solid #1e1e23;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 60px 200px 120px 100px 140px 140px 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.headerItem {
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.headerRank {
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.headerRight {
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: right;
+}
+
+.coinRow {
+  border-bottom: 1px solid #1a1a1f;
+  transition: all 0.3s ease;
+}
+
+.coinRow:hover {
+  background: #161619;
+}
+
+.coinRow:hover .coinRowInner {
+  color: #6366f1;
+}
+
+.coinRowInner {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 60px 200px 120px 100px 140px 140px 1fr;
+  gap: 1rem;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.rankCell {
+  text-align: center;
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.coinIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid #1e1e23;
+}
+
+.coinInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.coinName {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.coinSymbol {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.priceCell {
+  text-align: right;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.changeCell {
+  text-align: right;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.marketCapCell {
+  text-align: right;
+  font-weight: 500;
+  color: #d1d5db;
+  font-size: 0.95rem;
+}
+
+.volumeCell {
+  text-align: right;
+  font-weight: 500;
+  color: #d1d5db;
+  font-size: 0.95rem;
+}
+
+.supplyCell {
+  text-align: right;
+  font-weight: 500;
+  color: #d1d5db;
+  font-size: 0.9rem;
+}
+
+.positive {
+  color: #10b981;
+}
+
+.negative {
+  color: #ef4444;
+}
+
+/* Mobile Card Styles */
+.mobileCards {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.mobileCardLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.mobileCard {
+  background: #161619;
+  border: 1px solid #1e1e23;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.mobileCard:hover {
+  transform: translateY(-2px);
+  border-color: #2a2a2f;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.mobileCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.mobileCardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.mobileMetric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mobileMetricLabel {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.mobileMetricValue {
+  font-size: 0.9rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.mobileMetricValuePrice {
+  font-size: 1.1rem;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.rankBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  background: #1e1e23;
+  color: #6b7280;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.noResults {
+  text-align: center;
+  padding: 3rem;
+  color: #9ca3af;
+  font-size: 1.125rem;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .desktopGrid {
+    display: none;
+  }
+  
+  .mobileCards {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobileCardGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .mobileCard {
+    padding: 1rem;
+  }
+}

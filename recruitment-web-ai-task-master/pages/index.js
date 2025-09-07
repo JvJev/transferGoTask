@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import { getCoinsData } from '../lib/dataUtils';
-import { formatLargeNumber, formatPercentage, formatSupply } from '../lib/formatUtils';
+import CoinList from '../components/CoinList';
+
+
 
 export default function Home({ initialCoins }) {
   const [coins, setCoins] = useState(initialCoins);
@@ -71,7 +72,7 @@ export default function Home({ initialCoins }) {
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
           >
-            <option value="market_cap_rank">Rank (Default)</option>
+            <option value="market_cap_rank">Default (Market Cap)</option>
             <option value="name-asc">Name A-Z</option>
             <option value="name-desc">Name Z-A</option>
             <option value="price-desc">Price High to Low</option>
@@ -85,69 +86,14 @@ export default function Home({ initialCoins }) {
           </select>
         </div>
 
-        <div className={styles.tableContainer}>
-          <table className={styles.cryptoTable}>
-            <thead>
-              <tr>
-                <th className={styles.rankColumn}>#</th>
-                <th className={styles.nameColumn}>Name</th>
-                <th className={styles.priceColumn}>Price</th>
-                <th className={styles.changeColumn}>24h %</th>
-                <th className={styles.marketCapColumn}>Market Cap</th>
-                <th className={styles.volumeColumn}>Volume (24h)</th>
-                <th className={styles.supplyColumn}>Circulating Supply</th>
-              </tr>
-            </thead>
-            <tbody>
-              {coins.length > 0 ? (
-                coins.map(coin => (
-                  <tr key={coin.id} className={styles.tableRow}>
-                    <td className={styles.rankCell}>{coin.market_cap_rank}</td>
-                    <td className={styles.nameCell}>
-                      <Link href={`/coins/${coin.id}`} legacyBehavior>
-                        <a className={styles.coinLink}>
-                          <img src={coin.image} alt={coin.name} className={styles.coinIcon} />
-                          <div className={styles.coinNameInfo}>
-                            <span className={styles.coinName}>{coin.name}</span>
-                            <span className={styles.coinSymbol}>{coin.symbol.toUpperCase()}</span>
-                          </div>
-                        </a>
-                      </Link>
-                    </td>
-                    <td className={styles.priceCell}>
-                      ${coin.current_price.toLocaleString()}
-                    </td>
-                    <td className={`${styles.changeCell} ${coin.price_change_percentage_24h >= 0 ? styles.positive : styles.negative}`}>
-                      {formatPercentage(coin.price_change_percentage_24h)}
-                    </td>
-                    <td className={styles.marketCapCell}>
-                      {formatLargeNumber(coin.market_cap)}
-                    </td>
-                    <td className={styles.volumeCell}>
-                      {formatLargeNumber(coin.total_volume)}
-                    </td>
-                    <td className={styles.supplyCell}>
-                      {formatSupply(coin.circulating_supply)} {coin.symbol.toUpperCase()}
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="7" className={styles.noResults}>
-                    {searchTerm ? `No coins found matching "${searchTerm}"` : 'No cryptocurrency data available. Make sure that command "node updateCoins.js" is running in second terminal.'}
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+<CoinList coins={coins} searchTerm={searchTerm} />
       </main>
     </div>
   );
 }
 
 export async function getStaticProps() {
-  const initialCoins = getCoinsData();
+  const initialCoins = await getCoinsData();
   
   return {
     props: {

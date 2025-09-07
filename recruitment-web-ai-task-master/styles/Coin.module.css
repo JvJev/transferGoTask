@@ -1,93 +1,482 @@
- .container {
-    padding: 0 2rem;
+/* Coin.module.css - Dark Theme */
+
+.container {
+  min-height: 100vh;
+  background: #0a0a0b;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.08) 0%, transparent 50%);
+  padding: 0;
+  margin: 0;
+}
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  padding-bottom: 5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: #111115;
+  border: 1px solid #1e1e23;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.header:hover {
+  border-color: #2a2a2f;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+}
+
+.coinImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+  border: 2px solid #1e1e23;
+}
+
+.coinImage:hover {
+  transform: scale(1.05);
+  border-color: #2a2a2f;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.detailBox {
+  background: #111115;
+  border: 1px solid #1e1e23;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.detailBox::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.detailBox:hover {
+  transform: translateY(-2px);
+  border-color: #2a2a2f;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.detailBox:hover::before {
+  opacity: 1;
+}
+
+.detailBox h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6b7280;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detailBox p {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+}
+
+.priceValue {
+  font-size: 2rem !important;
+  color: #10b981 !important;
+  font-weight: 800 !important;
+}
+
+.positive {
+  color: #10b981 !important;
+  position: relative;
+}
+
+.positive::before {
+  content: '↗';
+  margin-right: 0.5rem;
+  font-size: 1.2em;
+}
+
+.negative {
+  color: #ef4444 !important;
+  position: relative;
+}
+
+.negative::before {
+  content: '↘';
+  margin-right: 0.5rem;
+  font-size: 1.2em;
+}
+
+.description {
+  background: #111115;
+  border: 1px solid #1e1e23;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.description:hover {
+  border-color: #2a2a2f;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.description h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 1.5rem 0;
+}
+
+.description p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #d1d5db;
+  margin: 0;
+  text-align: justify;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #111115;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 1px solid #1e1e23;
+  transition: all 0.3s ease;
+  font-size: 1.05rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.backButton:hover {
+  background: #1a1a1f;
+  border-color: #2a2a2f;
+  transform: translateX(-2px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Add these styles to your existing Coin.module.css to fix black text issues */
+
+.headerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rank {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  width: fit-content;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.priceSection {
+  background: #111115;
+  border: 1px solid #1e1e23;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.priceSection .priceValue {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #10b981;
+  margin-bottom: 1rem;
+}
+
+.priceChange {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.subMetric {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  color: #9ca3af;
+}
+
+.dateInfo {
+  display: block;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+.rangeSection {
+  background: #111115;
+  border: 1px solid #1e1e23;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.rangeSection h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 1.5rem 0;
+}
+
+.rangeDisplay {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rangeLow,
+.rangeHigh {
+  font-size: 0.9rem;
+  color: #ffffff;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rangeBar {
+  flex: 1;
+  height: 8px;
+  background: #1e1e23;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.rangeIndicator {
+  position: absolute;
+  top: -2px;
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border: 2px solid #6366f1;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.recordsSection,
+.supplySection,
+.roiSection {
+  margin-bottom: 3rem;
+}
+
+.recordsSection h3,
+.supplySection h3,
+.roiSection h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #1e1e23;
+  position: relative;
+}
+
+.recordsSection h3::after,
+.supplySection h3::after,
+.roiSection h3::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+}
+
+.lastUpdated {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #1e1e23;
+  color: #6b7280;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.loadingSection {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.loadingSection h1 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.loadingSection p {
+  color: #9ca3af;
+  margin-bottom: 2rem;
+}
+
+/* Ensure all text in detail boxes is white */
+.detailBox h3,
+.detailBox p,
+.detailBox span {
+  color: #ffffff !important;
+}
+
+.detailBox .subMetric {
+  color: #9ca3af !important;
+}
+
+.detailBox .dateInfo {
+  color: #6b7280 !important;
+}
+
+/* Fix description text */
+.description h3,
+.description p {
+  color: #ffffff !important;
+}
+
+.description .lastUpdated {
+  color: #6b7280 !important;
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+  .headerInfo {
+    align-items: center;
+    text-align: center;
   }
   
-  .main {
-    min-height: 100vh;
-    padding: 4rem 0;
-    display: flex;
+  .rank {
+    align-self: center;
+  }
+  
+  .priceSection .priceValue {
+    font-size: 2.5rem;
+  }
+  
+  .rangeDisplay {
     flex-direction: column;
-    align-items: center;
+    gap: 1rem;
+  }
+  
+  .rangeBar {
+    width: 100%;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .main {
+    padding: 1rem;
   }
   
   .header {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
-  
-  .coinImage {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 1rem;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem;
   }
   
   .title {
-    font-size: 3rem;
-    text-align: center;
+    font-size: 2rem;
+  }
+  
+  .coinImage {
+    width: 60px;
+    height: 60px;
   }
   
   .detailsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 800px;
-    margin-bottom: 2rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
   .detailBox {
-    background: #f9f9f9;
-    border: 1px solid #eaeaea;
-    border-radius: 10px;
     padding: 1.5rem;
-    text-align: center;
-  }
-  
-  .detailBox h3 {
-    margin-top: 0;
-    color: #555;
-  }
-  
-  .detailBox p {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0;
   }
   
   .priceValue {
-    color: #0070f3;
-  }
-  
-  .positive {
-    color: #16a34a; /* green */
-  }
-  
-  .negative {
-    color: #dc2626; /* red */
+    font-size: 1.5rem !important;
   }
   
   .description {
-    width: 100%;
-    max-width: 800px;
+    padding: 1.5rem;
+  }
+  
+  .description p {
+    font-size: 0.95rem;
     text-align: left;
-    line-height: 1.6;
-    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 0.5rem;
+  }
+  
+  .header {
     margin-bottom: 2rem;
+    padding: 1rem;
   }
   
-  .backButton {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background: #0070f3;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.2s ease;
+  .title {
+    font-size: 1.5rem;
   }
   
-  .backButton:hover {
-    background: #005bb5;
+  .detailBox {
+    padding: 1rem;
   }
+  
+  .detailBox p {
+    font-size: 1.2rem;
+  }
+  
+  .priceValue {
+    font-size: 1.3rem !important;
+  }
+}
