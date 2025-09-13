@@ -1,10 +1,16 @@
-// pages/coins/[id].js (with back button at top and bottom)
+// pages/coins/[id].js
 import Link from 'next/link';
 import styles from '../../styles/Coin.module.css';
 import LoadingDots from '../../components/LoadingDots';
 import { getCoinData, getCoinsData } from '../../lib/dataUtils';
-import { formatCurrency, formatLargeNumber, formatPercentageSimple, formatSupply } from '../../lib/formatUtils';
-
+import { 
+  formatCurrency, 
+  formatLargeNumber, 
+  formatPercentageSimple, 
+  formatSupply,
+  formatDate,
+  formatTimeAgo 
+} from '../../lib/formatUtils';
 
 function CoinPage({ coin }) {
   if (!coin) {
@@ -23,20 +29,6 @@ function CoinPage({ coin }) {
   }
 
   const isPositive = coin.price_change_percentage_24h >= 0;
-
-  // Format date helper
-  const formatTimeAgo = (dateString) => {
-    if (!dateString) return '';
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffInDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
-    
-    if (diffInDays === 0) return 'Today';
-    if (diffInDays === 1) return 'Yesterday';
-    if (diffInDays < 30) return `${diffInDays} days ago`;
-    if (diffInDays < 365) return `${Math.floor(diffInDays / 30)} months ago`;
-    return `${Math.floor(diffInDays / 365)} years ago`;
-  };
 
   return (
     <div className={styles.container}>
@@ -65,7 +57,7 @@ function CoinPage({ coin }) {
             {formatCurrency(coin.current_price)}
           </div>
           <div className={`${styles.priceChange} ${isPositive ? styles.positive : styles.negative}`}>
-            <span>{isPositive ? '↑' : '↓'}</span>
+            <span>{isPositive ? '↗' : '↘'}</span>
             <span>{formatCurrency(Math.abs(coin.price_change_24h || 0))}</span>
             <span>({formatPercentageSimple(coin.price_change_percentage_24h)})</span>
           </div>
@@ -223,7 +215,7 @@ function CoinPage({ coin }) {
           
           {coin.last_updated && (
             <p className={styles.lastUpdated}>
-              <em>Data last updated: {new Date(coin.last_updated).toLocaleString()}</em>
+              <em>Data last updated: {formatDate(coin.last_updated)}</em>
             </p>
           )}
         </div>

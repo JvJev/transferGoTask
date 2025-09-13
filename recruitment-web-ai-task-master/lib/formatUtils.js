@@ -73,11 +73,66 @@ function formatPercentageSimple(value) {
   return `${parseFloat(value).toFixed(2)}%`;
 }
 
+/**
+ * Format date with consistent locale to prevent hydration mismatches
+ * @param {string} dateString - ISO date string or timestamp
+ * @returns {string} Formatted date string
+ */
+function formatDate(dateString) {
+  if (!dateString) return '';
+  
+  const date = new Date(dateString);
+  
+  // Check if date is valid
+  if (isNaN(date.getTime())) return 'Invalid Date';
+  
+  // Use consistent format that won't change between server and client
+  return date.toLocaleString('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true,
+    timeZoneName: 'short'
+  });
+}
+
+/**
+ * Format date as relative time (e.g., "2 days ago", "Yesterday")
+ * @param {string} dateString - ISO date string or timestamp
+ * @returns {string} Relative time string
+ */
+function formatTimeAgo(dateString) {
+  if (!dateString) return '';
+  
+  const date = new Date(dateString);
+  const now = new Date();
+  
+  // Check if date is valid
+  if (isNaN(date.getTime())) return 'Invalid Date';
+  
+  const diffInMs = now - date;
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+  
+  if (diffInDays < 0) return 'In the future';
+  if (diffInDays === 0) return 'Today';
+  if (diffInDays === 1) return 'Yesterday';
+  if (diffInDays < 7) return `${diffInDays} days ago`;
+  if (diffInDays < 30) return `${Math.floor(diffInDays / 7)} weeks ago`;
+  if (diffInDays < 365) return `${Math.floor(diffInDays / 30)} months ago`;
+  
+  return `${Math.floor(diffInDays / 365)} years ago`;
+}
+
 module.exports = {
   isValidNumber,
   formatCurrency,
   formatLargeNumber,
   formatSupply,
   formatPercentage,
-  formatPercentageSimple
+  formatPercentageSimple,
+  formatDate,
+  formatTimeAgo
 };
